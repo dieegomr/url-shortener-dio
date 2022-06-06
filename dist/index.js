@@ -4,9 +4,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
+const URLcontroller_1 = require("./controller/URLcontroller");
 const api = (0, express_1.default)();
-api.get('/test', (req, res) => {
-    res.json({ success: true });
-});
+api.use(express_1.default.json());
+const urlController = new URLcontroller_1.URLController();
+api.post('/shorten', urlController.shorten);
+api.get('/:hash', urlController.redirect);
 api.listen(4000, () => console.log('Express listening'));
 //# sourceMappingURL=index.js.map
